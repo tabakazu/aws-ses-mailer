@@ -7,7 +7,7 @@ require 'aws/ses/mailer/version'
 Gem::Specification.new do |spec|
   spec.name        = 'aws-ses-mailer'
   spec.version     = Aws::Ses::Mailer::VERSION
-  spec.authors     = ['tabakazu']
+  spec.authors     = ['Kazuma Taba']
   spec.email       = ['tkazz.bd1@gmail.com']
   spec.homepage    = 'https://github.com/tabakazu/aws-ses-mailer'
   spec.summary     = 'AWS SES Client for Action Mailer'

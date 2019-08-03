@@ -16,4 +16,5 @@ Gem::Specification.new do |spec|
   spec.files       = Dir['lib/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   spec.add_dependency 'aws-sdk-ses', '~> 1.6'
   spec.add_development_dependency 'rails', '~> 5.2.3'
+  spec.add_development_dependency 'rspec', '~> 3.7'
 end

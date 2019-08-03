@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.summary     = 'AWS SES Client for Action Mailer'
   spec.description = 'AWS SES Client for Action Mailer'
   spec.license     = 'MIT'
-  spec.files = Dir["{app,config,db,lib}/**/*", 'MIT-LICENSE', 'Rakefile', 'README.md']
-  spec.add_dependency 'railties', '~> 5.0', '>= 5.0.0.1'
+  spec.files       = Dir['lib/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   spec.add_dependency 'aws-sdk-ses', '~> 1.6'
+  spec.add_development_dependency 'rails', '~> 5.2.3'
 end

@@ -8,9 +8,7 @@ module Aws
 
         def initialize(options = {})
           self.settings = options
-          self.ses = Aws::SES::Client.new(
-            region: settings.fetch(:region, 'us-west-2')
-          )
+          self.ses = Aws::SES::Client.new(settings)
         end
 
         def deliver!(mail)

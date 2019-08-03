@@ -8,33 +8,21 @@ module Aws
 
         def initialize(options = {})
           self.settings = options
+          self.ses = Aws::SES::Client.new(
+            region: settings.fetch(:region, 'us-west-2')
+          )
         end
 
         def deliver!(mail)
-          message = mail.is_a?(Hash) ? Mail.new(mail) : mail
+          options = { raw_message: {} }
+          options[:destinations] = mail.destinations
+          options[:raw_message][:data] = mail.to_s
 
-          request_data = {
-            destination: {},
-            message: {
-              body: {}
-            },
-            source: {},
-          }
-
-          html_data = message.body.parts.find { |part| part.content_type == 'text/html; charset=UTF-8' }.body.raw_source
-          text_data = message.body.parts.find { |part| part.content_type == 'text/plain; charset=UTF-8' }.body.raw_source
-
-          request_data[:destination].store(:to_addresses, message.to) if message.to
-          request_data[:message][:body].store(:text, { charset: 'UTF-8', data: text_data,}) if text_data
-          request_data[:message].store(:subject, { charset: 'UTF-8', data: message.subject,}) if message.subject
-          request_data[:source] = message.from.first if message.from.present?
-
-          ses = Aws::SES::Client.new(
-            region: settings.fetch(:region, 'us-west-2')
-          )
-
-          response = ses.send_email(request_data)
+          ses.send_raw_email(options)
         end
+
+        private
+        attr_accessor :ses
       end
     end
   end
